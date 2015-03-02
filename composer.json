@@ -1,0 +1,42 @@
+{
+    "name": "etna/config-provider",
+    "description": "ETNA Config Provider",
+    "keywords": ["utils", "config", "provider", "silex"],
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "ETNA",
+            "email": "dev@etna-alternance.net",
+            "homepage": "http://etna-alternance.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.5",
+
+        "silex/silex": "1.x",
+
+        "doctrine/orm": "2.x",
+        "dflydev/doctrine-orm-service-provider": "1.0.*@dev",
+        "beberlei/DoctrineExtensions": "dev-master",
+
+        "monolog/monolog": "~1.10",
+        "Ibsciss/supermonolog-service-provider": "dev-master",
+        "dzunke/slack-bundle" : "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "ETNA\\Silex\\Provider\\Config\\": "src"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "repositories": [
+       {
+           "type": "composer",
+           "url":  "http://blu-composer.herokuapp.com"
+       }
+   ]
+}
