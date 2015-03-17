@@ -21,7 +21,11 @@
 
         "monolog/monolog": "~1.10",
         "Ibsciss/supermonolog-service-provider": "dev-master",
-        "dzunke/slack-bundle" : "dev-master"
+        "dzunke/slack-bundle" : "dev-master",
+
+        "etna/auth-service-provider": "0.x",
+        "etna/elasticsearch-service-provider": "0.x",
+        "etna/rabbitmq-service-provider": "0.x"
     },
     "autoload": {
         "psr-4": {
