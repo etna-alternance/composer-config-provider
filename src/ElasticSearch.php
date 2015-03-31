@@ -59,10 +59,11 @@ class ElasticSearch implements ServiceProviderInterface
         }
 
         foreach ($this->es_options as $es_option) {
-            $host_config                 = parse_url($es_option['host']);
+            $parsed_url = parse_url($es_option['host']);
+            $index      = ltrim($parsed_url['path'], '/');
 
-            $app["elasticsearch.server"] = "{$host_config['scheme']}://{$host_config['host']}:{$host_config['port']}/";
-            $app["elasticsearch.index"]  = ltrim($host_config['path'], '/');
+            $app["elasticsearch.server"] = str_replace($parsed_url['path'], '', $es_option['host']) . "/";
+            $app["elasticsearch.index"]  = $index;
             $app["elasticsearch.type"]   = $es_option['type'];
             break;
         }
