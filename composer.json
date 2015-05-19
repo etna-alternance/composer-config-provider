@@ -25,7 +25,9 @@
 
         "etna/auth-service-provider": "0.x",
         "etna/elasticsearch-service-provider": "0.x",
-        "etna/rabbitmq-service-provider": "0.x"
+        "etna/rabbitmq-service-provider": "0.x",
+
+        "guzzle/silex-provider": "1.x"
     },
     "autoload": {
         "psr-4": {
