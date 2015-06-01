@@ -16,14 +16,13 @@ class ConversationProxy implements ServiceProviderInterface
 
     public function __construct($controller_instance = null)
     {
-        if (null !== $controller_instance) {
-            if (false === is_subclass_of($controller_instance, "ETNA\Silex\Provider\ConversationProxy\DumbMethodsProxy")) {
-                throw new \Exception("Controller given to ConversationProxyProvider have to inherit from DumbMethodsProxy");
-            }
-            $this->controller_instance = $controller_instance;
-        } else {
-            $this->controller_instance = new DumbMethodsProxy();
+        if (null === $controller_instance) {
+            $controller_instance = new DumbMethodsProxy();
         }
+        if (false === is_subclass_of($controller_instance, "ETNA\Silex\Provider\ConversationProxy\DumbMethodsProxy")) {
+            throw new \Exception("Controller given to ConversationProxyProvider have to inherit from DumbMethodsProxy");
+        }
+        $this->controller_instance = $controller_instance;
     }
 
     /**
