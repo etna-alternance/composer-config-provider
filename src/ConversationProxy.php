@@ -19,9 +19,11 @@ class ConversationProxy implements ServiceProviderInterface
         if (null === $controller_instance) {
             $controller_instance = new DumbMethodsProxy();
         }
+
         if (false === is_subclass_of($controller_instance, "ETNA\Silex\Provider\ConversationProxy\DumbMethodsProxy")) {
             throw new \Exception("Controller given to ConversationProxyProvider have to inherit from DumbMethodsProxy");
         }
+
         $this->controller_instance = $controller_instance;
     }
 
@@ -43,7 +45,8 @@ class ConversationProxy implements ServiceProviderInterface
             if (false === $conversation_api_url) {
                 throw new \Exception("ConversationProxyProvider needs env var CONVERSATION_API_URL");
             }
-            return new Client("{$conversation_api_url}", []);
+
+            return new Client($conversation_api_url, []);
         });
 
         $app["conversations"] = $app->share(function($app) {
