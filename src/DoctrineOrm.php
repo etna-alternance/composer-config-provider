@@ -91,6 +91,8 @@ class DoctrineOrm implements ServiceProviderInterface
 
         $configuration = $app["orm.em"]->getConfiguration();
 
+        $configuration->addCustomStringFunction('REPLACE', 'DoctrineExtensions\Query\Mysql\Replace');
+
         $configuration->addCustomStringFunction('MD5',  'DoctrineExtensions\Query\Mysql\Md5');
         $configuration->addCustomStringFunction('SHA1', 'DoctrineExtensions\Query\Mysql\Sha1');
         $configuration->addCustomStringFunction('SHA2', 'DoctrineExtensions\Query\Mysql\Sha2');
