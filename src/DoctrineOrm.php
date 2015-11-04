@@ -109,6 +109,8 @@ class DoctrineOrm implements ServiceProviderInterface
         $configuration->addCustomDatetimeFunction('WEEK',       'DoctrineExtensions\Query\Mysql\Week');
         $configuration->addCustomDatetimeFunction('MONTH',      'DoctrineExtensions\Query\Mysql\Month');
         $configuration->addCustomDatetimeFunction('YEAR',       'DoctrineExtensions\Query\Mysql\Year');
+
+        $configuration->addCustomDatetimeFunction('FIELD',      'DoctrineExtensions\Query\Mysql\Field');
     }
 
     /**
