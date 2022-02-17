@@ -18,6 +18,23 @@ class RabbitMQ implements ServiceProviderInterface
         $this->rmq_config['queues']    = isset($rmq_config['queues'])    ? $rmq_config['queues']    : [];
     }
 
+    private function coerce_to_bool($value, $name)
+    {
+        switch (strtolower($value)) {
+        case "yes":
+        case "1":
+        case "true":
+            return true;
+        case "no":
+        case "0":
+        case "false":
+            return false;
+        default:
+            throw new \Exception("Cannot coerce value '{$value}' into a boolean for {$name}");
+            return false;
+        }
+    }
+
     /**
      *
      * @{inherit doc}
@@ -30,6 +47,7 @@ class RabbitMQ implements ServiceProviderInterface
 
         $rmq_url   = getenv('RABBITMQ_URL');
         $rmq_vhost = getenv('RABBITMQ_VHOST');
+        $rmq_use_ssl = getenv('RABBITMQ_USE_SSL');
 
         if (false === $rmq_url) {
             throw new \Exception('RABBITMQ_URL is not defined');
@@ -38,6 +56,11 @@ class RabbitMQ implements ServiceProviderInterface
         if (false === $rmq_vhost) {
             throw new \Exception('RABBITMQ_VHOST is not defined');
         }
+
+        if (false === $rmq_use_ssl) {
+            throw new \Exception('RABBITMQ_USE_SSL is not defined');
+        }
+        $rmq_use_ssl = $this->coerce_to_bool($rmq_use_ssl, "RABBITMQ_USE_SSL");
 
         $config = parse_url($rmq_url);
 
@@ -54,7 +77,7 @@ class RabbitMQ implements ServiceProviderInterface
                 'user'     => $config['user'],
                 'password' => $config['pass'],
                 'vhost'    => $rmq_vhost,
-                'ssl'      => in_array($app['application_env'], ['development', 'production']),
+                'ssl'      => $rmq_use_ssl,
             ]
         ];
 
